@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทำนายการฝึกประสบการณ์วิชาชีพ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Font: Bai Jamjuree -->
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Bai Jamjuree', sans-serif;
+            padding-bottom: 20px;
+            /* เพิ่ม padding ด้านล่าง */
+        }
+
+
+
+        .container {
+            margin-top: 20px;
+            max-width: 600px;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .gender-option {
+            display: inline-block;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .gender-option img {
+            width: 50px;
+            height: 50px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+        }
+
+        .gender-option input[type="radio"] {
+            display: none;
+        }
+
+        .gender-option input[type="radio"]:checked+img {
+            border-color: #007bff;
+        }
+
+        #predictButton {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        #predictButton:hover {
+            background-color: #0056b3;
+        }
+
+        #resultModal .modal-header {
+            background-color: #007bff;
+            color: white;
+        }
+
+        #resultText {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #007bff;
+        }
+
+        .result-icon {
+            font-size: 50px;
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center text-primary">ทำนายการฝึกงาน</h1>
+        <form id="predictionForm">
+            <!-- เลือกเพศ -->
+            <div class="mb-4 text-center">
+                <label class="form-label">เพศ</label>
+                <div>
+                    <label class="gender-option">
+                        <input type="radio" name="gender" value="1" required>
+                        <img src="https://cdn-icons-png.flaticon.com/512/145/145867.png" alt="Male">
+                    </label>
+                    <label class="gender-option">
+                        <input type="radio" name="gender" value="2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/145/145852.png" alt="Female">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Skill ด้านต่าง ๆ -->
+            <div class="mb-4">
+                <label for="program" class="form-label">ทักษะด้านโปรแกรม</label>
+                <div class="mb-4">
+                    <button type="button" class="btn btn-outline-primary" onclick="updateValue('program', 1)"
+                        style="margin-right: 10px;">1</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="updateValue('program', 2)"
+                        style="margin-right: 10px;">2</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="updateValue('program', 3)"
+                        style="margin-right: 10px;">3</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="updateValue('program', 4)"
+                        style="margin-right: 10px;">4</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="updateValue('program', 5)"
+                        style="margin-right: 10px;">5</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="updateValue('program', 6)"
+                        style="margin-right: 10px;">6</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="updateValue('program', 7)"
+                        style="margin-right: 10px;">7</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="updateValue('program', 8)"
+                        style="margin-right: 10px;">8</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="updateValue('program', 9)"
+                        style="margin-right: 10px;">9</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="updateValue('program', 10)"
+                        style="margin-right: 10px;">10</button>
+                    <span type="button" class="btn btn-outline-dark" id="programValue"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="game" class="form-label">ทักษะด้านเกมและแอนิเมชัน</label>
+                    <div class="mb-4">
+                        <button type="button" class="btn btn-outline-success" onclick="updateValue('game', 1)"
+                            style="margin-right: 10px;">1</button>
+                        <button type="button" class="btn btn-outline-success" onclick="updateValue('game', 2)"
+                            style="margin-right: 10px;">2</button>
+                        <button type="button" class="btn btn-outline-success" onclick="updateValue('game', 3)"
+                            style="margin-right: 10px;">3</button>
+                        <button type="button" class="btn btn-outline-success" onclick="updateValue('game', 4)"
+                            style="margin-right: 10px;">4</button>
+                        <button type="button" class="btn btn-outline-success" onclick="updateValue('game', 5)"
+                            style="margin-right: 10px;">5</button>
+                        <button type="button" class="btn btn-outline-success" onclick="updateValue('game', 6)"
+                            style="margin-right: 10px;">6</button>
+                        <button type="button" class="btn btn-outline-success" onclick="updateValue('game', 7)"
+                            style="margin-right: 10px;">7</button>
+                        <button type="button" class="btn btn-outline-success" onclick="updateValue('game', 8)"
+                            style="margin-right: 10px;">8</button>
+                        <button type="button" class="btn btn-outline-success" onclick="updateValue('game', 9)"
+                            style="margin-right: 10px;">9</button>
+                        <button type="button" class="btn btn-outline-success" onclick="updateValue('game', 10)"
+                            style="margin-right: 10px;">10</button>
+                        <span type="button" class="btn btn-outline-dark" id="gameValue"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="network" class="form-label">ทักษะด้านเน็ตเวิร์ค</label>
+                        <div class="mb-4">
+                            <button type="button" class="btn btn-outline-warning" onclick="updateValue('network', 1)"
+                                style="margin-right: 10px;">1</button>
+                            <button type="button" class="btn btn-outline-warning" onclick="updateValue('network', 2)"
+                                style="margin-right: 10px;">2</button>
+                            <button type="button" class="btn btn-outline-warning" onclick="updateValue('network', 3)"
+                                style="margin-right: 10px;">3</button>
+                            <button type="button" class="btn btn-outline-warning" onclick="updateValue('network', 4)"
+                                style="margin-right: 10px;">4</button>
+                            <button type="button" class="btn btn-outline-warning" onclick="updateValue('network', 5)"
+                                style="margin-right: 10px;">5</button>
+                            <button type="button" class="btn btn-outline-warning" onclick="updateValue('network', 6)"
+                                style="margin-right: 10px;">6</button>
+                            <button type="button" class="btn btn-outline-warning" onclick="updateValue('network', 7)"
+                                style="margin-right: 10px;">7</button>
+                            <button type="button" class="btn btn-outline-warning" onclick="updateValue('network', 8)"
+                                style="margin-right: 10px;">8</button>
+                            <button type="button" class="btn btn-outline-warning" onclick="updateValue('network', 9)"
+                                style="margin-right: 10px;">9</button>
+                            <button type="button" class="btn btn-outline-warning" onclick="updateValue('network', 10)"
+                                style="margin-right: 10px;">10</button>
+                            <span type="button" class="btn btn-outline-dark" id="networkValue"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="embeded" class="form-label">ทักษะด้านสมองกลฝังตัว</label>
+                            <div class="mb-4">
+                                <button type="button" class="btn btn-outline-danger" onclick="updateValue('embeded', 1)"
+                                    style="margin-right: 10px;">1</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="updateValue('embeded', 2)"
+                                    style="margin-right: 10px;">2</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="updateValue('embeded', 3)"
+                                    style="margin-right: 10px;">3</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="updateValue('embeded', 4)"
+                                    style="margin-right: 10px;">4</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="updateValue('embeded', 5)"
+                                    style="margin-right: 10px;">5</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="updateValue('embeded', 6)"
+                                    style="margin-right: 10px;">6</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="updateValue('embeded', 7)"
+                                    style="margin-right: 10px;">7</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="updateValue('embeded', 8)"
+                                    style="margin-right: 10px;">8</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="updateValue('embeded', 9)"
+                                    style="margin-right: 10px;">9</button>
+                                <button type="button" class="btn btn-outline-danger"
+                                    onclick="updateValue('embeded', 10)" style="margin-right: 10px;">10</button>
+                                <span type="button" class="btn btn-outline-dark" id="embededValue"></span>
+                            </div>
+                            <br>
+
+                            <!-- ปุ่มทำนาย -->
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary w-50" id="predictButton"
+                                    onclick="submitForm()">ทำนาย</button>
+                            </div>
+        </form>
+    </div>
+
+    <!-- Modal แสดงผล -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultModalLabel">ผลลัพธ์การทำนาย</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="result-icon">✅</div>
+                    <div id="resultText">สถานประกอบการ: -</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        // ฟังก์ชันอัปเดตค่าตามปุ่มที่กด
+        function updateValue(id, value) {
+            document.getElementById(id + 'Value').textContent = value;  // แสดงค่าที่เลือกในปุ่ม
+            document.getElementById(id).value = value;  // อัปเดตค่าที่ input hidden
+
+        }
+
+        // ฟังก์ชันส่งข้อมูลไปยัง Flask API
+        async function submitForm() {
+            const gender = document.querySelector('input[name="gender"]:checked')?.value;
+            const program = parseInt(document.getElementById('programValue').textContent) || 0;
+            const game = parseInt(document.getElementById('gameValue').textContent) || 0;
+            const network = parseInt(document.getElementById('networkValue').textContent) || 0;
+            const embeded = parseInt(document.getElementById('embededValue').textContent) || 0;
+
+            if (!gender) {
+                alert("กรุณาเลือกเพศ!");
+                return;
+            }
+
+            const formData = {
+                data: [parseInt(gender), program, game, network, embeded]
+            };
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                const resultText = `สถานประกอบการที่เหมาะสม: ${result['Recommended Job'] || result['error']}`;
+
+                // แสดงผลลัพธ์ใน Modal
+                document.getElementById('resultText').textContent = resultText;
+                const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+                resultModal.show();
+            } catch (error) {
+                alert("เกิดข้อผิดพลาด: " + error.message);
+            }
+        }
+    </script>
+
+    <body>
+        <div>
+            <div class="text-end">
+                <a href="/logout" class="btn btn-danger">ออกจากระบบ</a>
+            </div>
+        </div>
+    </body>
+
+</html>
