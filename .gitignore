@@ -71,3 +71,8 @@ node_modules/
 .DS_Store
 dist
 .vercel
+
+.vercel
+
+# Local Netlify folder
+.netlify

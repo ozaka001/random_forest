@@ -265,7 +265,7 @@
             };
 
             try {
-                const response = await fetch('/predict', {
+                const response = await fetch('/.netlify/functions/predict', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
